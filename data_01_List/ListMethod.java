@@ -1,14 +1,14 @@
-package interface_form;
+package data_01_List;
 
 /**
- * Java Collection Framework / List의 method 정리
+ * Java Collection Framework / List의 주요 method 정리
  * ArrayList, LinkedList
  * 
- * 참고: https://blog.naver.com/pinktenshi/222309254165
+ * 개념 정리: https://blog.naver.com/pinktenshi/222309254165
  * @author 소윤
  * @param <E>
  */
-public interface List<E> {
+public interface ListMethod<E> {
 	
 	/**
 	 * List에서 특정 위치의 데이터 얻기
