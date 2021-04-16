@@ -199,8 +199,55 @@ public class ArrayList<E> implements ListMethod<E> {
 	}//contains
 	
 	
+	// ==================== remove method: 데이터 삭제 ====================
 	
-	// remove, size, isEmpty, clear method 추가 예정
+	// 1) remove(int index): 특정 위치의 데이터 삭제
+	// 2) remove(Object value): 특정 데이터 삭제 ==> 중복데이터가 존재할 경우 먼저 검색된 걸 삭제
+	
+	@SuppressWarnings("unchecked") // add 시 무조건 E만 받기 때문에 E로 캐스팅해도 형 안정성이 보장되므로 warnings 무시
+	@Override
+	public E remove(int index) {
+		
+		// 데이터를 교체할 위치인 index가 데이터 범위를 벗어날 경우
+		if(index >= size || index < 0) {
+			throw new IndexOutOfBoundsException(); // 예외발생
+		}
+		
+		E element = (E)array[index]; // 삭제할 데이터를 반환하기 위해 임시로 담아둠
+		
+		array[index] = null; // 해당 위치의 데이터 삭제
+		
+		// 삭제한 위치 뒤에 있는 데이터들을 한 칸씩 앞으로 당겨 빈 공간을 채움
+		for(int i = index; i < size; i++) {
+			array[i] = array[i+1];
+			array[i+1] = null;
+		}
+		size--; // 할당 공간을 줄여줌
+		
+		resize(); // 최적화(동적할당)
+		
+		return element; // 삭제한 데이터 반환
+	}//remove
+	
+	
+	@Override
+	public boolean remove(Object value) {
+		
+		// 삭제할 데이터의 위치 찾기
+		int index = indexOf(value);
+		
+		// 해당 데이터가 존재하지 않는 경우
+		if(index == -1) {
+			return false; // 삭제 실패
+		}
+		
+		remove(index); // indexOf로 찾은 위치를 이용해 데이터 삭제
+		
+		return true;
+	}
+	
+	
+	// size, isEmpty, clear method 추가 예정
 	
 
 }
