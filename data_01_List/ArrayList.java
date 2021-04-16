@@ -247,7 +247,35 @@ public class ArrayList<E> implements ListMethod<E> {
 	}
 	
 	
-	// size, isEmpty, clear method 추가 예정
+	// ==================== size method: 데이터 개수 반환 ====================
 	
+	// 변수가 private형이기 때문에 외부에서 접근 불가 ==> size의 값을 반환해주는 메소드 필요
+	
+	@Override
+	public int size() {
+		return size; 
+	}//size
+	
+	
+	// ==================== isEmpty method: 데이터가 비어있는지 확인 ====================
+	
+	@Override
+	public boolean isEmpty() {
+		return size == 0; // 데이터 개수가 0일 경우 true 반환
+	}//isEmpty
+	
+	
+	// ==================== clear method: 모든 데이터 삭제 ====================
+	
+	@Override
+	public void clear() {
+		
+		for(int i = 0; i < size; i++) {
+			array[i] = null; // 모든 데이터 삭제
+		}
+		size = 0; // 데이터 개수 0
+		
+		resize(); // 공간 최적화
+	}//clear
 
-}
+}//class
