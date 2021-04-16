@@ -29,6 +29,7 @@ public class ArrayList<E> implements ListMethod<E> {
 	
 	
 	// ==================== resize method: 동적할당 ====================
+	
 	// 데이터의 개수(size)를 확인하고 크기에 맞게 할당 공간을 변경 ==> 최적화, 메모리 관리
 	// 데이터 손상을 막기 위해 private 접근지정자 사용
 	private void resize() {
@@ -60,6 +61,7 @@ public class ArrayList<E> implements ListMethod<E> {
 	
 	
 	// ==================== add method: 데이터 추가 ====================
+	
 	// 1) addLast(E value): 마지막 위치에 추가 ==> 내장객체에선 add()
 	// 2) addFirst(E value): 처음 위치에 추가 ==> 내장객체에선 없지만 index를 0으로 줘서 구현 가능
 	// 3) add(int index, E value): 특정 위치(중간)에 추가 ==> 내장객체에선 add(int index, E element) 오버로딩
@@ -118,7 +120,87 @@ public class ArrayList<E> implements ListMethod<E> {
 	}//addFirst
 	
 	
-	// get, set, indexOf, contains, remove, size, isEmpty, clear method 추가 예정
+	// ==================== get method: 데이터 반환 ====================
+	
+	@SuppressWarnings("unchecked") // add 시 무조건 E만 받기 때문에 E로 캐스팅해도 형 안정성이 보장되므로 warnings 무시
+	@Override
+	public E get(int index) {
+		
+		// 데이터를 찾을 위치인 index가 데이터 범위를 벗어날 경우
+		if(index >= size || index < 0) {
+			throw new IndexOutOfBoundsException(); // 예외발생
+		}
+		
+		// Object => E 타입으로 캐스팅 ==> 원본 데이터 타입으로 반환
+		return (E)array[index];
+	}//get
+	
+	
+	// ==================== set method: 데이터 교체 ====================
+	
+	public void set(int index, E value) {
+		
+		// 데이터를 교체할 위치인 index가 데이터 범위를 벗어날 경우
+		if(index >= size || index < 0) {
+			throw new IndexOutOfBoundsException(); // 예외발생
+			
+		} else {
+			// 해당 위치의 데이터 값 교체
+			array[index] = value;
+		}//else
+	}//set
+	
+	
+	// ==================== indexOf method: 데이터의 위치 반환 ====================
+	
+	// 1) indexOf(Object value): 처음 index인 0부터 검색
+	// 2) lastIndexOf(Object value): 마지막 index부터 검색 ==> 검색할 데이터가 뒤에 있을 것으로 예상될 경우
+	
+	@Override
+	public int indexOf(Object value) {
+		int i = 0;
+		// array[0]부터 끝까지 순서대로 검색 ==> 중복 데이터가 있을 경우 먼저 검색되는 index 반환
+		for(i = 0; i < size; i++) {
+			// 찾는 데이터 값과 일치할 경우 ==> 객체 비교 시 반드시 equals() 사용
+			if(array[i].equals(value)) { 
+				return i; // 해당 index 반환
+			}
+		}//for
+		
+		// 해당 데이터가 없을 경우 -1 반환
+		return -1;
+	}//indexOf
+	
+	
+	public int lastIndexOf(Object value) {
+		// array[size-1]부터 거꾸로 검색
+		for(int i = size-1; i >= 0; i--) { // index는 0부터 시작하므로 마지막 index는 size-1
+			if(array[i].equals(value)) {
+				return i;
+			}
+		}//for
+		
+		// 해당 데이터가 없을 경우 -1 반환
+		return -1;
+	}//lastIndexOf
+	
+	
+	// ==================== contains method: 데이터 존재 여부 반환 ====================
+	
+	@Override
+	public boolean contains(Object value) {
+		// index가 0 이상일 경우 해당 데이터가 존재함
+		if(indexOf(value) >= 0) {
+			return true;
+		
+		} else {
+			return false;
+		}
+	}//contains
+	
+	
+	
+	// remove, size, isEmpty, clear method 추가 예정
 	
 
 }
