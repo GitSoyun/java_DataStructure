@@ -1,5 +1,7 @@
 package data_02_LinkedList;
 
+import java.util.NoSuchElementException;
+
 import data_00_interface.List;
 
 public class SinglyLinkedList<E> implements List<E> {
@@ -29,7 +31,7 @@ public class SinglyLinkedList<E> implements List<E> {
 			x = x.next; // x노드의 다음 노드를 x변수에 저장
 		}
 		
-		return x;
+		return x; // 해당 위치의 노드
 	}//search
 	
 	
@@ -94,21 +96,173 @@ public class SinglyLinkedList<E> implements List<E> {
 		}
 		
 		// 추가할 위치의 이전 노드
-		SinglyNode<E> prev_Node = search(index-1);
+		SinglyNode<E> prevNode = search(index-1);
 		
 		// 추가할 위치의 노드
-		SinglyNode<E> next_Node = prev_Node.next;
+		SinglyNode<E> nextNode = prevNode.next;
 		
 		// 추가할 노드
 		SinglyNode<E> newNode = new SinglyNode<E>(value);
 		
-		prev_Node.next = null; // 추가할 위치의 이전 노드가 가리키는 다음 노드를 끊어줌
-		prev_Node.next = newNode; // 새 노드를 다음 노드로 연결
-		newNode.next = next_Node; // 새노드의 다음 노드를 연결
+		prevNode.next = null; // 추가할 위치의 이전 노드가 가리키는 다음 노드를 끊어줌
+		prevNode.next = newNode; // 새 노드를 다음 노드로 연결
+		newNode.next = nextNode; // 새노드의 다음 노드를 연결
 		size++; // 데이터 개수 증가
 	}//add
 	
 	
+	// ==================== remove method: 데이터 삭제 ====================
 	
-
+	// 1) remove(): 맨 앞 데이터 삭제
+	// 2) remove(int index): 특정 위치의 데이터 삭제
+	// 3) remove(Object value): 특정 데이터 삭제
+	
+	public E remove() {
+		
+		SinglyNode<E> headNode = head; // 삭제할 맨 앞 데이터
+		
+		// 리스트에 데이터가 없을 경우
+		if(headNode == null) {
+			throw new  NoSuchElementException(); // 예외발생
+		}
+		
+		// 삭제한 데이터를 반환하기 위한 임시변수
+		E element = headNode.data;
+		
+		// head노드의 다음 노드 생성
+		SinglyNode<E> nextNode = head.next;
+		
+		// head노드의 데이터 모두 삭제
+		head.data = null;
+		head.next = null;
+		
+		// 삭제 후 새로운 head 설정
+		head = nextNode;
+		size--; 
+		
+		// 하나 뿐인 데이터를 삭제한 경우 tail이 없으므로 삭제
+		if(size == 0) {
+			tail = null;
+		}
+		
+		return element; // 삭제한 데이터
+	}//remove
+	
+	
+	@Override
+	public E remove(int index) {
+		
+		// 맨 앞부분의 데이터를 삭제할 경우
+		if(index == 0) {
+			return remove();
+		}
+		
+		// 데이터를 삭제할 범위가 올바르지 않은 경우
+		if(index >= size || index < 0) {
+			throw new IndexOutOfBoundsException(); // 예외발생
+		}
+		
+		SinglyNode<E> prevNode = search(index-1); // 삭제할 데이터의 이전 노드
+		SinglyNode<E> removedNode = prevNode.next; // 삭제할 데이터 노드
+		SinglyNode<E> nextNode = removedNode.next; // 삭제할 데이터의 다음 노드
+		
+		// 삭제할 데이터를 반환하기 위한 임시변수
+		E element = removedNode.data;
+		
+		// 이전 노드와 삭제할 데이터의 다음 노드를 연결
+		prevNode.next = nextNode;
+		
+		// 데이터 삭제
+		removedNode.data = null;
+		removedNode.next = null;
+		size--;
+		
+		return element; // 삭제한 데이터
+	}//remove
+	
+	
+	@Override
+	public boolean remove(Object value) {
+		
+		SinglyNode<E> prevNode = head; // 삭제할 데이터의 이전 노드
+		boolean hasValue = false; // 삭제 가능여부를 확인하기 위한 변수
+		SinglyNode<E> x = head; // 데이터를 검색하기 위한 노드 변수
+		
+		// head부터 삭제할 데이터 검색
+		for(; x != null; x = x.next) {
+			// x노드의 데이터가 value와 일치할 경우
+			if(value.equals(x.data)) {
+				hasValue = true; // 삭제 가능 확인
+				break;
+			}
+			prevNode = x;
+		}//for
+		
+		// 삭제할 데이터가 head일 경우
+		if(x.equals(head)) {
+			remove();
+			return true; // 삭제 완료
+		
+		// 삭제할 데이터가 존재하지 않을 경우
+		} else if (!hasValue) {
+			return false; // 삭제 실패
+		
+		// 삭제할 데이터가 head 외에 존재할 경우
+		} else {
+			prevNode.next = x.next; // 이전 노드와 삭제할 데이터의 다음 노드를 연결
+			
+			// 데이터 삭제
+			x.data = null; 
+			x.next = null;
+			size--;
+			
+			return true; // 삭제 성공
+		}//else
+		
+	}//remove
+	
+	
+	// ==================== get method: 데이터 반환 ====================
+	
+	@Override
+	public E get(int index) {
+		// search method가 특정 위치의 노드를 반환하므로 이를 이용
+		return search(index).data;
+	}//get
+	
+	
+	// ==================== set method: 데이터 교체 ====================
+	
+	@Override
+	public void set(int index, E value) {
+		// search method를 이용해 교체할 노드를 찾음
+		SinglyNode<E> replaceNode = search(index);
+		replaceNode.data = null; // 해당 노드의 데이터 초기화
+		replaceNode.data = value; // 해당 노드의 데이터 교체
+	}//set
+	
+	
+	// ==================== indexOf method: 데이터의 위치 반환 ====================
+	
+	@Override
+	public int indexOf(Object value) {
+		int index = 0; // 초기화 값
+		SinglyNode<E> x = head; // 데이터를 검색하기 위한 노드 변수
+		
+		// head부터 데이터 검색
+		for(; x != null; x = x.next) {
+			// x노드의 데이터가 value와 일치할 경우
+			if(value.equals(x.data)) {
+				// 해당 데이터의 위치 반환
+				return index;
+			}
+			index++; // index가 계속 증가
+		}//for
+		
+		// 해당 데이터가 존재하지 않을 경우 -1 반환
+		return -1;
+	}//indexOf
+	
+	
+	
 }//class
