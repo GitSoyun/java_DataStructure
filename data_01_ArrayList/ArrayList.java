@@ -1,8 +1,10 @@
-package data_01_List;
+package data_01_ArrayList;
 
 import java.util.Arrays;
 
-public class ArrayList<E> implements ListMethod<E> {
+import data_00_interface.List;
+
+public class ArrayList<E> implements List<E> {
 	
 	// 상수(constant): 고정된 값
 	private static final int DEFAULT_CAPACITY = 10; // 최소 할당 크기(공간)

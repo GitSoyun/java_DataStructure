@@ -1,4 +1,4 @@
-package data_01_List;
+package data_00_interface;
 
 /**
  * Java Collection Framework / List의 주요 method 정리
@@ -8,7 +8,7 @@ package data_01_List;
  * @author 소윤
  * @param <E>
  */
-public interface ListMethod<E> {
+public interface List<E> {
 	
 	/**
 	 * List에서 특정 위치의 데이터 얻기
