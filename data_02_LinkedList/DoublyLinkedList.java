@@ -349,5 +349,41 @@ public class DoublyLinkedList<E> implements List<E> {
 		return indexOf(value) >= 0; // true 반환
 	}//contains
 	
+	
+	// ==================== size method: 데이터 개수 반환 ====================
+	
+	// 변수가 private형이기 때문에 외부에서 접근 불가 ==> size의 값을 반환해주는 메소드 필요
+	
+	@Override
+	public int size() {
+		return size;
+	}//size
+	
+	
+	// ==================== isEmpty method: 데이터가 비어있는지 확인 ====================
+	
+	@Override
+	public boolean isEmpty() {
+		return size == 0; // 데이터가 0개일 경우 true 반환
+	}//isEmpty
+	
+	
+	// ==================== clear method: 모든 데이터 삭제 ====================
+	
+	@Override
+	public void clear() {
+		DoublyNode<E> x = head; // 정방향 삭제 ==> index=0부터 삭제
+		
+		for(; x != null;) {
+			DoublyNode<E> nextNode = x.next;
+			x.data = null;
+			x.next = null;
+			x.prev = null;
+			x = nextNode;
+		}
+		
+		head = tail = null;
+		size = 0; // 개수 0
+	}//clear
 
 }//class
