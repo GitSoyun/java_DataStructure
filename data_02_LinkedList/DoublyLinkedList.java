@@ -279,6 +279,75 @@ public class DoublyLinkedList<E> implements List<E> {
 	}//remove
 	
 	
+	// ==================== get method: 데이터 반환 ====================
+	
+	@Override
+	public E get(int index) {
+		// search method가 특정 위치의 노드를 반환하므로 이를 이용
+		return search(index).data;
+	}//get
+	
+	
+	// ==================== set method: 데이터 교체 ====================
+	
+	@Override
+	public void set(int index, E value) {
+		// search method를 이용해 교체할 노드를 찾음
+		DoublyNode<E> replaceNode = search(index);
+		replaceNode.data = null; // 해당 노드의 데이터 초기화
+		replaceNode.data = value; // 해당 노드의 데이터 교체
+	}//set
+	
+	
+	// ==================== indexOf method: 데이터의 위치 반환 ====================
+	
+	@Override
+	public int indexOf(Object value) { // 정방향 검색 ==> 맨 앞부터 검색
+		int index = 0; // 초기화 값
+		DoublyNode<E> x = head; // index=0부터 검색하기 위한 노드 변수
+		
+		// head부터 데이터 검색
+		for(; x != null; x = x.next) {
+			// x노드의 데이터가 value와 일치할 경우
+			if(value.equals(x.data)) {
+				// 해당 데이터의 위치 반환
+				return index;
+			}
+			index++; // index가 계속 증가
+		}//for
+		
+		// 해당 데이터가 존재하지 않을 경우 -1 반환
+		return -1;
+	}//indexOf
+	
+	
+	public int lastIndexOf(Object value) { // 역방향 검색 ==> 맨 뒤부터 검색
+		int index = size; // 실제 List의 총 index보다 +1인 상태
+		DoublyNode<E> x = tail; // 맨 뒤부터 검색하기 위한 노드 변수
+		
+		// tail부터 데이터 검색
+		for(; x != null; x = x.prev) {
+			index--; // index변수를 실제 List의 총 index와 일치시켜주고, 역방향 검색
+			
+			// x노드의 데이터가 value와 일치할 경우
+			if(value.equals(x.data)) {
+				// 해당 데이터의 위치 반환
+				return index; 
+			}
+		}//for
+		
+		// 해당 데이터가 존재하지 않을 경우 -1 반환
+		return -1;
+	}//lastIndexOf
+	
+	
+	// ==================== contains method: 특정 데이터 존재 여부 반환 ====================
+	
+	@Override
+	public boolean contains(Object value) {
+		// index가 0 이상일 경우 해당 데이터가 존재함
+		return indexOf(value) >= 0; // true 반환
+	}//contains
 	
 
 }//class
