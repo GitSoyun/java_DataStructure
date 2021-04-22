@@ -3,8 +3,9 @@ Java, 자료구조 JCF 정리
 
 ---
 
-## 내용
-- Java Collections Framework를 이해하기 위해 구현해보며 학습한 걸 정리한 자료
+## 설명
+- Data Structure의 종류와 원리를 제대로 이해하기 위함
+- Java Collections Framework를 구현하며 학습한 내용을 정리
 
 ---
 
