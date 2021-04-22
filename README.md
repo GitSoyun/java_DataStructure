@@ -13,8 +13,8 @@ Java, 자료구조 JCF 정리
 ![image](https://user-images.githubusercontent.com/80728433/115755515-65232e80-a3d8-11eb-895c-5ab8b5e79532.png)
 - [List interface](./data_00_interface/List.java)
   - [ArrayList](./data_01_ArrayList/ArrayList.java)
-  - [Singly LinkedList](./data_02_LinkedList/SinglyLinkedList.java)
-  - [Doubly LinkedList](./data_02_LinkedList/DoublyLinkedList.java)
+  - [Singly LinkedList](./data_02_LinkedList/SinglyLinkedList.java) / [Node](./data_02_LinkedList/SinglyNode.java)
+  - [Doubly LinkedList](./data_02_LinkedList/DoublyLinkedList.java) / [Node](./data_02_LinkedList/DoublyNode.java)
 
 - [Stack interface](./data_00_interface/Stack.java)
   - Stack
