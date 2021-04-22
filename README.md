@@ -6,6 +6,7 @@ Java, 자료구조 JCF 정리
 ## 설명
 - Data Structure의 종류와 원리를 제대로 이해하기 위함
 - Java Collections Framework를 구현하며 학습한 내용을 정리
+- [개념 정리 바로가기](https://blog.naver.com/pinktenshi/222309254165)
 
 ---
 
