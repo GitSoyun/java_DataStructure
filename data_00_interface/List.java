@@ -5,7 +5,6 @@ package data_00_interface;
  * ArrayList, LinkedList
  * 
  * ∞≥≥‰ ¡§∏Æ: https://blog.naver.com/pinktenshi/222309254165
- * @author º“¿±
  * @param <E>
  */
 public interface List<E> {
