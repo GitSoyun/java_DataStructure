@@ -17,7 +17,7 @@ public interface Stack<E> {
 	
 	
 	/**
-	 * Stack의 맨 위에 있는 요소를 꺼내 삭제 후 반환
+	 * Stack의 맨 위에 있는 데이터를 꺼내 삭제 후 반환
 	 * @return 꺼낸 데이터
 	 */
 	E pop();
