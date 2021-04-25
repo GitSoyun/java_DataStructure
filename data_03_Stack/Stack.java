@@ -1,6 +1,7 @@
 package data_03_Stack;
 
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 public class Stack<E> implements data_00_interface.Stack<E> {
 	
@@ -62,7 +63,7 @@ public class Stack<E> implements data_00_interface.Stack<E> {
 		
 		// 공간이 꽉 찬 경우
 		if(size == array.length) {
-			resize(); // 재할당
+			resize(); // 동적할당
 		}
 		
 		array[size] = item; // 마지막 위치에 데이터(item) 추가
@@ -71,6 +72,26 @@ public class Stack<E> implements data_00_interface.Stack<E> {
 		return item;
 	}//push
 	
+	
+	// ==================== pop method: 데이터 삭제 후 반환 ====================
+	
+	@Override
+	public E pop() {
+		
+		// 삭제할 데이터가 없을 경우
+		if(size == 0) {
+			throw new EmptyStackException(); // 예외발생
+		}
+		
+		@SuppressWarnings("unchecked") // push 시 무조건 E type만 받기 때문에 E로 캐스팅해도 형 안정성이 보장됨 ==> warnings 무시 가능
+		E data = (E)array[size-1]; // 삭제할 데이터를 반환하기 위해 변수에 담아둠
+		
+		array[size-1] = null; // 데이터 삭제
+		size--; // 개수 감소
+		resize(); // 동적할당
+		
+		return data;
+	}//pop
 	
 	
 	
