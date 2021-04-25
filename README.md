@@ -17,7 +17,7 @@ Java, 자료구조 JCF 정리
   - [Doubly LinkedList](./data_02_LinkedList/DoublyLinkedList.java) / [Node](./data_02_LinkedList/DoublyNode.java)
 
 - [Stack interface](./data_00_interface/Stack.java)
-  - Stack
+  - [Stack](./data_03_Stack/Stack.java)
 
 - Queue Interface
   - Array Queue
