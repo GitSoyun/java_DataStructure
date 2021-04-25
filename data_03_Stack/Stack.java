@@ -147,8 +147,11 @@ public class Stack<E> implements data_00_interface.Stack<E> {
 	}//clear
 	
 	
+	// ==================== empty method: 데이터가 비어있는지 확인  ====================
 	
-
-	
+	@Override
+	public boolean isEmpty() {
+		return size == 0; // 데이터 개수가 0개일 경우 true 반환
+	}//empty
 	
 }//class

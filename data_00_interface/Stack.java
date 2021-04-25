@@ -56,6 +56,6 @@ public interface Stack<E> {
 	 * Stack의 데이터가 비어있는지 확인
 	 * @return 데이터가 존재하지 않을 경우 true, 존재할 경우 false 반환
 	 */
-	boolean empty();
+	boolean isEmpty();
 	
 }
