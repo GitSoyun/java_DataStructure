@@ -55,5 +55,23 @@ public class Stack<E> implements data_00_interface.Stack<E> {
 	}//resize
 	
 	
+	// ==================== push method: 데이터 추가 ====================
+	
+	@Override
+	public E push(E item) {
+		
+		// 공간이 꽉 찬 경우
+		if(size == array.length) {
+			resize(); // 재할당
+		}
+		
+		array[size] = item; // 마지막 위치에 데이터(item) 추가
+		size++; // 개수 증가
+		
+		return item;
+	}//push
+	
+	
+	
 	
 }//class
