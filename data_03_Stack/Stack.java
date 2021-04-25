@@ -126,5 +126,29 @@ public class Stack<E> implements data_00_interface.Stack<E> {
 	}//search
 	
 	
+	// ==================== size method: 데이터의 개수 반환  ====================
+	
+	@Override
+	public int size() {
+		return size;
+	}//size
+	
+	
+	// ==================== clear method: 모든 데이터 삭제  ====================
+	
+	@Override
+	public void clear() {
+		
+		for(int i = 0; i < size; i++) {
+			array[i] = null; // 모든 데이터 삭제
+		}
+		size = 0; // 데이터 개수 0
+		resize(); // 공간 최적화
+	}//clear
+	
+	
+	
+
+	
 	
 }//class
