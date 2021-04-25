@@ -109,5 +109,22 @@ public class Stack<E> implements data_00_interface.Stack<E> {
 	}//peek
 	
 	
+	// ==================== search method: 데이터의 상대적 위치 반환  ====================
+	
+	@Override
+	public int search(Object value) {
+		
+		// 맨 위부터 검색
+		for(int index = size-1; index >= 0; index--) {
+			// value와 일치할 경우
+			if(array[index].equals(value)) {
+				return size - index; // 맨 위부터의 위치(거리, 1부터 시작) 반환
+			}
+		}//for
+		
+		return -1; // 일치하는 데이터가 없을 경우 -1 반환
+	}//search
+	
+	
 	
 }//class
