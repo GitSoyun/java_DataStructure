@@ -94,5 +94,20 @@ public class Stack<E> implements data_00_interface.Stack<E> {
 	}//pop
 	
 	
+	// ==================== peek method: 데이터 삭제없이 반환 ====================
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public E peek() {
+		
+		// 삭제할 데이터가 없을 경우
+		if(size == 0) {
+			throw new EmptyStackException(); // 예외발생
+		}
+		
+		return (E)array[size-1];
+	}//peek
+	
+	
 	
 }//class
