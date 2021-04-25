@@ -152,6 +152,6 @@ public class Stack<E> implements data_00_interface.Stack<E> {
 	@Override
 	public boolean isEmpty() {
 		return size == 0; // 데이터 개수가 0개일 경우 true 반환
-	}//empty
+	}//isEmpty
 	
 }//class
