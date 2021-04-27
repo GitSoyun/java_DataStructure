@@ -9,6 +9,8 @@ public class ArrayQueue<E> implements Queue<E> {
 	private Object[] array; // 데이터를 넣을 배열
 	private int size; // 데이터의 개수
 	
+	// Queue의 경우 선입선출(FIFO)이기 때문에 index=0 부터 시작이 아닌, 원형 큐를 생각하면 이해가 쉽다.
+	// 직선 배열이라면 앞부분을 채워주려고 하나씩 앞으로 당길 경우 불필요한 연산이 많아지기 때문.
 	private int front; // 시작 위치(index)를 가리키는 변수
 	private int rear; // 마지막 위치(index)를 가리키는 변수
 	
@@ -57,6 +59,26 @@ public class ArrayQueue<E> implements Queue<E> {
 		rear = size; // 끝 index 설정
 	}//resize
 	
+	
+	// ==================== offer method: 큐에 데이터 추가 ====================
+	
+	// 마지막 index에 도달했을 경우(배열이 꽉 차있을 경우) 주의
+	
+	@Override
+	public boolean offer(E item) {
+		
+		// 공간이 꽉 찬 경우
+		if((rear+1) % array.length == front) {
+			resize(array.length * 2); // 크기 2배로 늘려줌
+		}
+		
+		rear = (rear+1) % array.length; // rear을 다음 위치로 변경
+		
+		array[rear] = item; // 맨 뒤에 데이터 추가
+		size++; // 개수 증가
+		
+		return true; // 데이터 추가 성공 시 true 반환
+	}//offer
 	
 	
 
