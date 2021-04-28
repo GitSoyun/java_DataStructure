@@ -60,7 +60,7 @@ public class ArrayQueue<E> implements Queue<E> {
 	}//resize
 	
 	
-	// ==================== offer method: 큐에 데이터 추가 ====================
+	// ==================== offer method: 맨 뒤에 데이터 추가 ====================
 	
 	// 마지막 index에 도달했을 경우(배열이 꽉 차있을 경우) 주의
 	
@@ -79,6 +79,37 @@ public class ArrayQueue<E> implements Queue<E> {
 		
 		return true; // 데이터 추가 성공 시 true 반환
 	}//offer
+	
+	
+	// ==================== poll method: 맨 앞 데이터 삭제 후 반환 ====================
+	
+	// add, remove, element: 큐도 가능, 예외발생 O
+	// offer, poll, peek: 예외발생 X
+	
+	@Override
+	public E poll() {
+		
+		// 삭제할 데이터가 없을 경우
+		if(size == 0) {
+			return null; // null 반환 ==> 예외발생X 차이점 확인하기
+		}
+		
+		front = (front+1) % array.length; // front를 다음 위치로 한 칸 변경
+		
+		@SuppressWarnings("unchecked") // 형 안정성이 보장되므로 Warnings 무시
+		E item = (E)array[front]; // 반환할 데이터 저장
+		
+		array[front] = null; // 맨 앞의 데이터 삭제
+		size--; // 개수 감소
+		
+		// 배열 길이가 최소 할당 공간보다 크고 개수가 1/4 미만일 경우 
+		if(array.length > DEFAULT_CAPACITY && size < (array.length/4)) {
+			// 최소용적보다 작게 줄이지는 않음
+			resize(Math.max(DEFAULT_CAPACITY, array.length/2));
+		}
+		
+		return item; // 삭제한 데이터 반환
+	}//poll
 	
 	
 
