@@ -1,5 +1,7 @@
 package data_04_Queue;
 
+import java.util.NoSuchElementException;
+
 import data_00_interface.Queue;
 
 public class ArrayQueue<E> implements Queue<E> {
@@ -91,7 +93,7 @@ public class ArrayQueue<E> implements Queue<E> {
 		
 		// 삭제할 데이터가 없을 경우
 		if(size == 0) {
-			return null; // null 반환 ==> 예외발생X 차이점 확인하기
+			return null; // null 반환 ==> 예외발생 X 차이점 확인하기
 		}
 		
 		front = (front+1) % array.length; // front를 다음 위치로 한 칸 변경
@@ -110,6 +112,19 @@ public class ArrayQueue<E> implements Queue<E> {
 		
 		return item; // 삭제한 데이터 반환
 	}//poll
+	
+	
+	public E remove() {
+		
+		E item = poll();
+		
+		if(item == null) {
+			throw new NoSuchElementException(); // 예외발생 O
+		}
+		
+		return item;
+	}//remove
+	
 	
 	
 
