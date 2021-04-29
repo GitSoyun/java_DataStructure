@@ -19,7 +19,7 @@ Java, 자료구조 JCF 정리
 - [Stack interface](./data_00_interface/Stack.java)
   - [Stack](./data_03_Stack/Stack.java)
 
-- Queue Interface
+- [Queue Interface](./data_00_interface/Queue.java)
   - Array Queue
   - LinkedList Queue
   - Priority Queue
