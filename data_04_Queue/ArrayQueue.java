@@ -93,7 +93,7 @@ public class ArrayQueue<E> implements Queue<E> {
 		
 		// 삭제할 데이터가 없을 경우
 		if(size == 0) {
-			return null; // null 반환 ==> 예외발생 X 차이점 확인하기
+			return null; // null 반환 ==> 예외발생X 차이점 확인하기
 		}
 		
 		front = (front+1) % array.length; // front를 다음 위치로 한 칸 변경
@@ -119,12 +119,40 @@ public class ArrayQueue<E> implements Queue<E> {
 		E item = poll();
 		
 		if(item == null) {
-			throw new NoSuchElementException(); // 예외발생 O
+			throw new NoSuchElementException(); // 예외발생
 		}
 		
 		return item;
 	}//remove
 	
+	
+	// ==================== peek method: 데이터 삭제없이 반환 ====================
+	
+	@Override
+	public E peek() {
+		
+		// 데이터가 하나도 없을 경우
+		if(size == 0) {
+			return null; // null 반환 ==> 예외발생 X 차이점 확인하기
+		}
+		
+		@SuppressWarnings("unchecked") // 형 안정성이 보장되므로 Warnings 무시
+		E item = (E)array[(front+1) % array.length];
+		
+		return item;
+	}//peek
+	
+	
+	public E element() {
+		
+		E item = peek();
+		
+		if(item == null) {
+			throw new NoSuchElementException(); // 예외발생
+		}
+		
+		return item;
+	}//element
 	
 	
 
