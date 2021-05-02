@@ -83,7 +83,7 @@ public class ArrayQueue<E> implements Queue<E> {
 	}//offer
 	
 	
-	// ==================== poll method: 맨 앞 데이터 삭제 후 반환 ====================
+	// ==================== poll, remove method: 맨 앞 데이터 삭제 후 반환 ====================
 	
 	// add, remove, element: 큐도 가능, 예외발생 O
 	// offer, poll, peek: 예외발생 X
@@ -126,7 +126,7 @@ public class ArrayQueue<E> implements Queue<E> {
 	}//remove
 	
 	
-	// ==================== peek method: 데이터 삭제없이 반환 ====================
+	// ==================== peek, element method: 데이터 삭제없이 반환 ====================
 	
 	@Override
 	public E peek() {
@@ -153,6 +153,31 @@ public class ArrayQueue<E> implements Queue<E> {
 		
 		return item;
 	}//element
+	
+	
+	// ==================== size method: 데이터의 개수 반환  ====================
+	
+	public int size() {
+		return size;
+	}//size
+	
+	
+	// ==================== isEmpty method: 데이터가 비어있는지 확인  ====================
+	
+	public boolean isEmpty() {
+		return size == 0;
+	}//isEmpty
+	
+	
+	// ==================== clear method: 모든 데이터 삭제  ====================
+	
+	public void clear() {
+		
+		for(int i = 0; i < array.length; i++) {
+			array[i] = null; // 데이터 삭제
+		}
+		front = rear = size = 0;
+	}//clear
 	
 	
 
