@@ -21,7 +21,7 @@ Java, 자료구조 JCF 정리
 
 - [Queue Interface](./data_00_interface/Queue.java)
   - [Array Queue](./data_04_Queue/ArrayQueue.java)
-  - LinkedList Queue
+  - LinkedList Queue / [Node](./data_04_Queue/SinglyNode.java)
   - Priority Queue
 
 - Deque Interface
